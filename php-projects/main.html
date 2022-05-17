@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Registration Form</h1>
+    <div class="container">
+        <form action="test.php" method="POST" id="formId" >
+            <h4>Name: <input type="text" id="nameId" name="name" placeholder="name"></h4>
+            <div id="nameErr" style="display: none; color: red;">Name is required </div>
+
+            <h4>Email Id: <input type="text" id="emailId" name="email" required placeholder="example@gmail.com"></h4>
+            <div id="emailErr" style="display: none; color: red;"></div>
+            <h4>Phone Number: <input type="text" name="phone" id="phoneId" required placeholder="xxxx xxx xxx"></h4>
+            <div id="phoneErr" style="display: none; color: red;"> </div>
+            <h4>
+                Gender: <br>
+                <label for="s1">male</label>
+                <input type="radio" id="maleRadio" name="genderRadio" value="male"/>
+                <br/>
+                <label for="s2">female</label>
+                <input type="radio" id="femaleRadio" name="genderRadio" value="female"/>
+                <div id="genderErr" style="display: none; color: red;">please select a gender </div>
+    
+              
+            </h4>
+            <h4>
+                <label class="paylabel" for="gradId">Graduation:</label>
+                <select id="gradId" name="graduation">
+                 <option value="selectGrad">--- Please select ---</option>
+                  <option id="Mtech" name="mtech" value="Mtech">Mtech</option>
+                  <option id="Btech" name="btech" value="Btech">Btech</option>
+                  <option id="Bsc" name="bsc" value="Bsc">Bsc</option>
+                  <option id="other" name="other" value="other">other</option>
+                 
+                </select>
+                <div id="gradErr" style="display: none; color: red;">please select a value </div>
+            </h4>
+              <h4>
+                <label for="commentsId">Comments</label>
+                <textarea id="commentsId" name="comments" rows="4" cols="50">
+                 
+                  </textarea>
+                  <div id="commentsErr" style="display: none; color: red;"> please enter any comments</div>
+              </h4>
+
+              <input type="button" id="buttonId" onclick=" isValid()" value="enter">
+
+
+
+        </form>
+
+
+    </div>
+</body>
+<script>
+    function isValid(){
+     nameValue=document.getElementById("nameId").value;
+     emailValue=document.getElementById("emailId").value;
+     phoneValue=document.getElementById("phoneId").value;
+     genderValue ="";
+     commentsValue=document.getElementById("commentsId").innerText;
+     gradValue = document.getElementById("gradId");
+     selectedValue = gradValue.options[gradValue.selectedIndex].value;
+
+
+
+     if(nameValue == ""){
+       document.getElementById("nameErr").style.display="block";
+       return false;
+     }
+     else{
+       document.getElementById("nameErr").style.display="none";
+
+
+       if(emailValue == ""){
+         document.getElementById("emailErr").innerHTML="Please enter email";
+         document.getElementById("emailErr").style.display="block";
+         return false;
+     }
+     else if(!(emailValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))){
+         document.getElementById("emailErr").innerHTML="email not valid";
+         document.getElementById("emailErr").style.display="block";
+         return false;
+     }
+     else   {
+       document.getElementById("emailErr").style.display="none";
+
+            if(phoneValue == ""){
+             document.getElementById("phoneErr").innerHTML="Please Enter phone number";
+             document.getElementById("phoneErr").style.display="block";
+            return false;
+            }
+            else if(!(phoneValue.match(/^[0-9]+$/))){
+            document.getElementById("phoneErr").innerHTML="phone number should only contain numbers";
+            document.getElementById("phoneErr").style.display="block";
+            return false;
+            }
+            else if(phoneValue.length!=10){
+            document.getElementById("emailErr").innerHTML="phone number should be 10 digits";
+            document.getElementById("emailErr").style.display="block";
+            return false;
+            }
+    
+            else{
+             document.getElementById("phoneErr").style.display="none";
+
+             var getSelectedValue = document.querySelector( 'input[name="genderRadio"]:checked');   
+                if(getSelectedValue != null) {   
+                    document.getElementById("genderErr").style.display="none";
+                    if(document.getElementById('maleRadio').checked == true){
+                         genderValue="male";
+                        console.log(genderValue);
+                    }
+                    else if(document.getElementById('femaleRadio').checked == true){
+                         genderValue ="female";
+                        console.log(genderValue);
+                    }
+
+                    if (selectedValue == "selectGrad")
+                    {       
+                     document.getElementById("gradErr").style.display="block";
+                     return false;
+                    }
+                     else{
+                    document.getElementById("gradErr").style.display="none";
+                    // submit form
+                    document.getElementById("formId").submit();                        
+                    // if(commentsValue == ""){
+                    //      document.getElementById("commentsErr").style.display="block";
+                    //      return false;
+                    //     }
+                    //  else{
+                    //     document.getElementById("commentsErr").style.display="none";
+                    //     return true
+                    //     }
+                    }
+
+
+
+                } 
+                else {  
+                    document.getElementById("genderErr").style.display="block";  
+
+
+
+                    
+                }
+             
+                }          
+         }
+
+     
+     }
+     
+
+
+    }
+
+</script>
+
+</html>
