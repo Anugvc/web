@@ -1,0 +1,4 @@
+1000,ajay,developer,25000,2
+1001,vijay,manager,30000,3
+1002,arun,qa,28000,2
+1003,raju,mrkt,28000,1
